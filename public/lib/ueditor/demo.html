@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+</head>
+
+<body>
+ <script src="ueditor.parse.js"></script>
+    <!-- 加载编辑器的容器 -->
+    <form action="server.php" method="post">
+       <!-- <script id="container" name="content" type="text/plain" class="content">
+            这里写你的初始化内容
+        </script>
+        -->
+        <div id="container1" name="content" class="content" style="width:700px;height:300px;border:1px solid #ccc"></div>
+          <div id="container2" name="content" class="content" style="width:700px;height:300px;border:1px solid #ccc"></div>
+        <input type='submit' value="提交">
+    </form>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+       
+        uParse('.content',{
+        'rootPath': './'
+        })
+        var ue = UE.getEditor('container1',{
+            initialFrameWidth :700,//设置编辑器宽度
+            initialFrameHeight:300,//设置编辑器高度
+            scaleEnabled:true
+        });
+        var ue2 = UE.getEditor('container2');
+        ue.ready(function() {
+            //设置编辑器的内容
+            ue.setContent('hello');
+            //获取html内容，返回: <p>hello</p>
+            var html = ue.getContent();
+            //获取纯文本内容，返回: hello
+            var txt = ue.getContentTxt();
+        });
+    </script>
+</body>
+
+</html>

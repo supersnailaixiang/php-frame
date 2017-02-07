@@ -1,0 +1,52 @@
+ 
+			<div>
+			 <span> 共{$page.total}条记录 当前第{$page.cur_page}页 共{$page.total_page}页</span>
+				<div style="float:right">
+					 
+					 <a href="" id="first_page"><button >首页</button></a>
+					 <a href="" id="prev_page"><button >上一页</button></a>
+					 <a href="" id="next_page"><button  >下一页</button></a>
+					 <input type='text' id="input_page"></input>
+					 <a href="" id="turn_page"> <button >跳转</button></a>
+				</div>
+			</div>
+<script type="text/javascript">
+	var search = "{$search}";
+	var page = {$js_page}
+	
+	{literal}
+	$(function(){
+		$("#first_page").click(function(){
+			search +="&page=1";
+			alert(search);
+			$(this).attr("href",search);
+		});
+		$("#prev_page").click(function(){
+			var target_page = page.cur_page >1 ? page.cur_page-1:1;
+			search += "&page="+target_page;
+			$(this).attr("href",search);
+		});
+		$("#next_page").click(function(){
+			 
+			var target_page = page.cur_page+1 >page.total_page ? page.total_page : page.cur_page+1;
+			search += "&page="+target_page;
+			 
+			$(this).attr("href",search);
+		});
+		$("#turn_page").click(function(){
+			var input_page = $("#input_page").val();
+			if(input_page < 1){
+				alert("跳转页不能小于1");
+				return false;
+			}
+			if(input_page >page.total_page){
+				alert("跳转页不能大于总页数");
+				return false;
+			}
+			
+			search += "&page="+input_page;
+			$(this).attr("href",search);
+		});
+	});
+	{/literal}
+</script>
